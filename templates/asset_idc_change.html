@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block css %}
+<link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2> <small>|&nbsp;<a href="">新增资产设备</a></small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <form class="form-horizontal form-border" method="post" action="" enctype="multipart/form-data">
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-md-6 col-md-offset-3">
+                                             <form action="" method="post">
+                                                 {% csrf_token %}
+
+                                                 <table>
+                                                    <tr>
+                                                        <td><label for="">设备名称</label></td>
+                                                        <td><input type="text" class="form-control" name="hostname" value="{{ asset_obj.hostname }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">IP地址</label></td>
+                                                        <td><input type="text" class="form-control" name="ip_addr" value="{{ asset_obj.ip_addr }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">用户名</label></td>
+                                                        <td> <input type="text" class="form-control" name="username" value="{{ asset_obj.username }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label for="">密码</label></td>
+                                                        <td><input type="text" class="form-control" name="password" value="{{ asset_obj.password }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">设备型号</label></td>
+                                                        <td><input type="text" class="form-control" name="model" value="{{ asset_obj.model }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">SN号</label></td>
+                                                        <td><input type="text" class="form-control" name="sn" value="{{ asset_obj.sn }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">位置</label></td>
+                                                        <td><input type="text" class="form-control" name="local" value="{{ asset_obj.local }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label for="">资源类型</label></td>
+                                                        <td><input type="text" class="form-control" name="resource_type" value="{{ asset_obj.resource_type }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> <label for="">端口</label></td>
+                                                        <td><input type="text" class="form-control" name="port" value="{{ asset_obj.port }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">系统版本</label></td>
+                                                        <td><input type="text" class="form-control" name="system_version" value="{{ asset_obj.system_version }}"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><label for="">所属组</label></td>
+                                                        <td><input type="text" class="form-control" name="group" value="{{ asset_obj.group }}"></td>
+                                                    </tr>
+                                                 </table>
+                                                 <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <button id="send" type="submit" class="btn btn-success">更新</button>
+                                                        <button id="send" type="submit" class="btn btn-success">返回</button>
+                                                    </div>
+                                                </div>
+                                             </form>
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<!--<script type="text/javascript" src="http://ip.qq.com/js/geo.js"></script>-->
+<script type="text/javascript" src="/static/js/geo.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+$('#id_contract_date').datetimepicker({
+        //language:  'fr',
+format: 'yyyy-mm-dd',
+language: 'zh-CN',
+weekStart: 1,
+setStartDate: new Date(),
+todayBtn:  1,
+autoclose: 1,
+todayHighlight: 1,
+startView: 3,
+minView: 2,
+forceParse: 0,
+showMeridian: 1,
+pickerPosition: "bottom-left"
+})
+
+{% ifequal action 'add' %}
+$(function(){
+    setup();preselect('广东省');promptinfo();
+})
+
+//这个函数是必须的，因为在geo.js里每次更改地址时会调用此函数
+function promptinfo()
+{
+}
+
+// 提交前处理idc_location的值
+$("#send").bind("click",function(){
+var s1 = $("#s1").val();
+var s2 = $("#s2").val();
+var s3 = $("#s3").val();
+var s4 = $("#id_idc_location").val();
+var idc_location = s1 + s2 + s3 + s4;
+$("#id_idc_location").val(idc_location);
+})
+{% endifequal %}
+</script>
+{% endblock %}
