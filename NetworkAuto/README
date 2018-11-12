@@ -1,0 +1,41 @@
+所需模块
+  
+python 网络模块
+	netmiko 	
+	paramiko 	基于Python实现的SSH2远程安装连接
+	telnetlib
+	Pyroute2 
+	dnspython	实现的一个DNS工具包
+	fabric		Python实现的SSH命令行工具
+	IPy			IP地址处理模块
+	pexpect		Linux下expect的Python封装
+	Networkx	Python复杂网络分析库
+	pyGraphviz	一个用于可视化查看数据包的Python接口
+	Stem		一款与Tor网络进行交互的Python控制器
+	Netaddr		Python网络编程库
+	Scapy		爬取pcap文件中的数据包信息
+	Ipwhois		用于获取whois信息中的IP地址
+	
+
+python 系统模块
+	psutil   	系统性能信息模块
+	platform  	判断系统
+	difflib		对比文本之间的差异
+	filecmp		实现文件，目录，遍历子目录的差异，对比功能
+	smtplib		发送电子邮件模块
+	pycurl		可以理解为Linux下curl命令功能的Python封装
+	playbook	一个非常简单的配置管理和多主机部署系统
+	func		为解决集群管理，监控问题需设计开发的系统管理基础框架。
+	saltstack	是一个服务器基础架构集中化管理平台，一般可以理解为简化版的puppet和加强版的func。
+	ansible		一种集成IT系统的配置管理，应用部署，执行特定任务的开源平台。
+	Cmd			Cmd类型提供了一个创建命令行解析器的框架
+	
+python 网络编程
+	socket
+	threading
+	queue
+	socketServer
+	
+python 安全
+	getpass
+	
